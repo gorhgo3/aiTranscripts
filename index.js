@@ -1,7 +1,8 @@
 import { YoutubeTranscript } from 'youtube-transcript'
 import OpenAI from 'openai'
+import { config } from 'dotenv'
 
-console.log('hello world')
+config()
 
 const ENDPOINT = 'https://www.youtube.com/watch?v=YtkZR0NFd1g&ab_channel=Dotenv'
 
@@ -21,7 +22,7 @@ async function checkVideo() {
       can you summarise the content of this transcript for a youtube video and bulletpoint the key points, and importantly explain if this is up to date to modern learning to code practises:
       ${await data}`
 
-    // runAI(message)
+    runAI(message)
   } catch (err) {
     console.log('Transcript may be disabled for this video')
     console.log(err)
@@ -30,7 +31,7 @@ async function checkVideo() {
 
 async function runAI(message) {
   const openai = new OpenAI({
-    // apiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY,
   })
 
   const chatCompletion = await openai.chat.completions.create({
